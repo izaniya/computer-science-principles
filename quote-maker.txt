@@ -1,0 +1,26 @@
+var quote;
+var color;
+var fontFamily;
+var fontSize;
+
+onEvent("quoteInput", "keyup", function() {
+  quote = getText("quoteInput");
+  setProperty("quoteOutput", "text", quote);
+});
+
+
+
+onEvent("colorInput", "change", function() {
+  color = getText("colorInput");
+  setProperty("colorOutput", "background-color", color);
+});
+
+onEvent("fontFamilyInput", "change", function() {
+  fontFamily = getText("fontFamilyInput");
+  setProperty("quoteOutput", "font-family", fontFamily);
+});
+
+onEvent("fontSizeInput", "mousemove", function() {
+  fontSize = getNumber("fontSizeInput");
+  setProperty("quoteOutput", "font-size", fontSize);
+});

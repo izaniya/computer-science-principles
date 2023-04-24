@@ -1,0 +1,32 @@
+var day;
+var age;
+var discount;
+var price;
+
+onEvent("calculateButton", "click", function() {
+  
+  day = getText("dayDropdown");
+  age = getText("ageDropdown");
+  discount = getText("discountInput");
+  price = 0;
+    
+  if ((day == "Saturday") || (day == "Sunday")) {
+    price = price + 3;
+  } else {
+    price = price + 10;
+  }
+    
+  if (age > 17) {
+    price = price + 10;
+  } else {
+    price = price + 5;
+  }
+    
+  if (discount == "FREEFRIDAY") {
+    price = 0;
+  }
+  
+  setProperty("ticketOutput", "text", "Day: " + day + "\n" + "Age: " + age + "\n" + "Fee: $" + price);
+  price = 0;
+  
+});

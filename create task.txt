@@ -1,0 +1,55 @@
+// Book titles provided by OpenLibrary.org
+var fantasy = ["Treasure Island", "Gulliver's Travels", "Moby Dick", "Dracula", "The Call of the Wild", "The War of the Worlds", "Nineteen Eighty-Four", "The Time Machine", "The Hobbit", "The Invisible Man", "Le Petit Prince", "The Secret Garden", "The Wind in the Willows"];
+var horror = ["Frakenstein", "The Shining", "The beetle", "Carmilla", "Le fantôme de l'opéra", "Northern Lights", "Twilight", "Daisy Miller"];
+var mystery = ["Oliver Twist", "The Adventures of Sherlock Holmes", "A Study in Scarlet", "The Hound of Baskervilles", "The Sign of Four", "The Lost World", "The Secret Adversary", "The Woman in White", "Death on the Nile"];
+var scifi = ["Alice's Adventures in Wonderland", "Brave New World"];
+var romance = ["Pride and Prejudice", "Romeo and Juliet", "Ethan Frome", "Mansfield Park", "A Tale of Two Cities", "Persuasion", "The House of Mirth", "Heart of Darkness"];
+
+// Finds the books according to the text in the dropdown
+onEvent("bookButton", "click", function() {
+  
+  if(getText("genreDropdown") == "Pick a Genre!"){
+    setText("bookOutput", "Pick a Genre!");
+  }
+  if(getText("genreDropdown") == "Fantasy"){
+    findBook(fantasy);
+  }
+  if(getText("genreDropdown") == "Horror"){
+    findBook(horror);
+  }
+  if(getText("genreDropdown") == "Mystery"){
+    findBook(mystery);
+  }
+  if(getText("genreDropdown") == "Science Fiction"){
+    findBook(scifi);
+  }
+  if(getText("genreDropdown") == "Romance"){
+    findBook(romance);
+  }
+});
+
+// Take the genre of the book and find 3 new books to display
+function findBook(genre){
+  
+  setProperty("bookOutput", "text", "");
+  var text = "";
+  var bookList = [];
+  
+  for(var i = 2; i >= 0; i--){ // Adds 3 books to a list
+    var book = genre[i];
+    
+    removeItem(genre, i);
+    
+    appendItem(bookList, book);
+  }
+  
+  for(var a = 2; a >=0; a--){ // Displays the book list
+    text = getText("bookOutput");
+    setProperty("bookOutput", "text", a + 1 + ". " + bookList[a] + "\n" + text);
+  }
+  
+  if(genre.length === 0){ // Checks if there are any books left.
+    setProperty("bookOutput", "text", "No more books in this genre!");
+  }
+  
+}
